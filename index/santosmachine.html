@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Bases</title>
+
+    <link rel="stylesheet" href="../style/styleantigo.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <img src="../assets/Santos_Logo.png" style="width: 150px;">
+        <h1>Santos's Machine</h1>
+        <h3>Insira um número:</h3>
+        <input id="inputValue" type="text" placeholder="Digite o valor">
+
+        <br> <br>
+
+        <span> O número acima está em qual base? </span>
+        <select class="selected" id="inputBase">
+
+            <option value="decimal">Decimal</option>
+            <option value="hexadecimal">Hexadecimal</option>
+            <option value="octal">Octal</option>
+            <option value="binario">Binário</option>
+
+        </select>
+
+        <br><br>
+
+        <h3>Converter para:</h3>
+
+        <input type="checkbox" id="convertDecimal"><label for="convertDecimal">Decimal</label>
+        <input type="checkbox" id="convertHexadecimal"><label for="convertHexadecimal">Hexadecimal</label>
+        <input type="checkbox" id="convertOctal"><label for="convertOctal">Octal</label>
+        <input type="checkbox" id="convertBinario"><label for="convertBinario">Binário</label>
+        <input type="checkbox" id="convertTodas"><label for="convertTodas">Todas as bases</label>
+
+        <br><br>
+
+        <button onclick="converter()">Converter</button>
+
+        <br><br>
+
+        <div id="output"></div>
+
+        <br><br>
+
+        <a href="../index/calculadora.html"> <button> Calculadora da Bases ➔ </button> </a>
+
+
+    </div>
+
+    <div class="hino">
+        <button id="playButton"> <img src="../assets/Santos_Logo.png"
+                style="width: 40px;"> <img
+                src="https://icones.pro/wp-content/uploads/2021/07/icone-de-haut-parleur-jaune.png"
+                style="width: 40px;">
+        </button>
+    </div>
+
+    <script>
+        function converter() {
+            var inputValue = document.getElementById('inputValue').value;
+            var inputBase = document.getElementById('inputBase').value;
+
+            if (!validarEntrada(inputValue, inputBase)) {
+                alert('Por favor, insira um número válido para a base selecionada.');
+                return;
+            }
+
+            var decimalValue = parseInt(inputValue, inputBase === 'hexadecimal' ? 16 : inputBase === 'octal' ? 8 : inputBase === 'binario' ? 2 : 10);
+            var outputHTML = '';
+
+            if (document.getElementById('convertDecimal').checked) {
+                output.style.display = 'block';
+                outputHTML += `<p>Decimal: ${decimalValue}</p>`;
+            }
+            if (document.getElementById('convertHexadecimal').checked) {
+                output.style.display = 'block';
+                outputHTML += `<p>Hexadecimal: ${decimalValue.toString(16).toUpperCase()}</p>`;
+            }
+            if (document.getElementById('convertOctal').checked) {
+                output.style.display = 'block';
+                outputHTML += `<p>Octal: ${decimalValue.toString(8)}</p>`;
+            }
+            if (document.getElementById('convertBinario').checked) {
+                output.style.display = 'block';
+                outputHTML += `<p>Binário: ${decimalValue.toString(2)}</p>`;
+            }
+            if (document.getElementById('convertTodas').checked) {
+                output.style.display = 'block';
+                outputHTML += `<p>Binário: ${decimalValue.toString(2)}</p>`;
+                outputHTML += `<p>Octal: ${decimalValue.toString(8)}</p>`;
+                outputHTML += `<p>Hexadecimal: ${decimalValue.toString(16).toUpperCase()}</p>`;
+                outputHTML += `<p>Decimal: ${decimalValue}</p>`;
+            }
+            document.getElementById('output').innerHTML = outputHTML;
+        }
+
+        function validarEntrada(inputValue, inputBase) {
+
+            var validChars = '';
+
+            if (inputBase === 'decimal') {
+                validChars = '0123456789';
+            } else if (inputBase === 'hexadecimal') {
+                validChars = '0123456789ABCDEFabcdef';
+            } else if (inputBase === 'octal') {
+                validChars = '01234567';
+            } else if (inputBase === 'binario') {
+                validChars = '01';
+            }
+
+            for (var i = 0; i < inputValue.length; i++) {
+                if (validChars.indexOf(inputValue[i]) === -1) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        const audio = new Audio('hino-santos-fc.mp3');
+        document.getElementById('playButton').addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                audio.muted = false;
+            } else {
+                audio.pause();
+            }
+        });
+
+    </script>
+</body>
+
+</html>

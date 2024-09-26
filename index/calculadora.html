@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Bases</title>
+
+    <link rel="stylesheet" href="../style/styleantigo.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Santos_Logo.png" style="width: 150px;">
+
+        <h1>Santos's Machine</h1>
+
+        <h3>Insira um número:</h3>
+        <input id="inputValue" type="text" placeholder="Digite o valor">
+
+        <br> <br>
+
+        <span> O número acima está em qual base? </span>
+        <select id="inputBase">
+
+            <option value="decimal">Decimal</option>
+            <option value="hexadecimal">Hexadecimal</option>
+            <option value="octal">Octal</option>
+            <option value="binario">Binário</option>
+
+        </select>
+
+        <h3>Insira outro número:</h3>
+        <input id="inputValue2" type="text" placeholder="Digite o valor">
+
+        <br> <br>
+
+        <span> O número acima está em qual base? </span>
+        <select id="inputBase2">
+
+            <option value="decimal">Decimal</option>
+            <option value="hexadecimal">Hexadecimal</option>
+            <option value="octal">Octal</option>
+            <option value="binario">Binário</option>
+
+        </select>
+
+        <br><br>
+
+        <h3>Qual operação deseja realizar?</h3>
+
+        <select id="slt_operacao">
+            <option value="#"> Selecione uma operação </option>
+            <option id="realizarSoma" value="realizarSoma"> Soma </option>
+            <option id="realizarSubtracao" value="realizarSubtracao"> Subtração </option>
+            <option id="realizarDivisao" value="realizarDivisao"> Divisão </option>
+            <option id="realizarMultiplicacao" value="realizarMultiplicacao"> Multiplicação </option>
+        </select>
+
+        <br><br>
+
+        <button onclick="calcular()">Calcular</button>
+
+        <br><br>
+
+        <div id="output"></div>
+
+        <br><br>
+
+        <a href="../index/santosmachine.html"> <button> 🠔 Calculadora de conversão </button> </a>
+
+
+    </div>
+
+    <div class="hino">
+        <button id="playButton"> <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Santos_Logo.png"
+                style="width: 40px;"> <img
+                src="https://icones.pro/wp-content/uploads/2021/07/icone-de-haut-parleur-jaune.png"
+                style="width: 40px;">
+        </button>
+    </div>
+
+    <script>
+        function calcular() {
+            var outputHTML = "";
+            var inputValue = document.getElementById('inputValue').value;
+            var inputValue2 = document.getElementById('inputValue2').value;
+            var inputBase = document.getElementById('inputBase').value;
+            var inputBase2 = document.getElementById('inputBase2').value;
+
+            if (!validarEntrada(inputValue, inputBase)) {
+                alert('Por favor, insira um número válido para a base selecionada.');
+                return;
+            }
+
+            if (!validarEntrada2(inputValue2, inputBase2)) {
+                alert('Por favor, insira um número válido para a base selecionada.');
+                return;
+            }
+
+            var decimalValue1 = parseInt(inputValue, inputBase === 'hexadecimal' ? 16 : inputBase === 'octal' ? 8 : inputBase === 'binario' ? 2 : 10);
+            var decimalValue2 = parseInt(inputValue2, inputBase2 === 'hexadecimal' ? 16 : inputBase2 === 'octal' ? 8 : inputBase2 === 'binario' ? 2 : 10);
+
+            if (document.getElementById('realizarSoma').selected) {
+                output.style.display = 'block';
+                var soma = decimalValue1 + decimalValue2;
+                outputHTML += `<p>Decimal: ${soma}</p>`;
+                outputHTML += `<p>Hexadecimal: ${soma.toString(16).toUpperCase()}</p>`;
+                outputHTML += `<p>Octal: ${soma.toString(8)}</p>`;
+                outputHTML += `<p>Binário: ${soma.toString(2)}</p>`;
+            }
+            if (document.getElementById('realizarSubtracao').selected) {
+                output.style.display = 'block';
+                var subtracao = decimalValue1 - decimalValue2;
+                outputHTML += `<p>Decimal: ${subtracao}</p>`;
+                outputHTML += `<p>Hexadecimal: ${subtracao.toString(16).toUpperCase()}</p>`;
+                outputHTML += `<p>Octal: ${subtracao.toString(8)}</p>`;
+                outputHTML += `<p>Binário: ${subtracao.toString(2)}</p>`;
+            }
+            if (document.getElementById('realizarDivisao').selected) {
+                output.style.display = 'block';
+                var divisao = decimalValue1 / decimalValue2;
+                outputHTML += `<p>Decimal: ${divisao}</p>`;
+                outputHTML += `<p>Hexadecimal: ${divisao.toString(16).toUpperCase()}</p>`;
+                outputHTML += `<p>Octal: ${divisao.toString(8)}</p>`;
+                outputHTML += `<p>Binário: ${divisao.toString(2)}</p>`;
+            }
+            if (document.getElementById('realizarMultiplicacao').selected) {
+                output.style.display = 'block';
+                var multiplicacao = decimalValue1 * decimalValue2;
+                outputHTML += `<p>Decimal: ${multiplicacao}</p>`;
+                outputHTML += `<p>Hexadecimal: ${multiplicacao.toString(16).toUpperCase()}</p>`;
+                outputHTML += `<p>Octal: ${multiplicacao.toString(8)}</p>`;
+                outputHTML += `<p>Binário: ${multiplicacao.toString(2)}</p>`;
+            }
+
+            document.getElementById('output').innerHTML = `${outputHTML}`;
+        }
+
+        function validarEntrada(inputValue, inputBase) {
+
+            var validChars = '';
+
+            if (inputBase === 'decimal') {
+                validChars = '0123456789';
+            } else if (inputBase === 'hexadecimal') {
+                validChars = '0123456789ABCDEFabcdef';
+            } else if (inputBase === 'octal') {
+                validChars = '01234567';
+            } else if (inputBase === 'binario') {
+                validChars = '01';
+            }
+
+            for (var i = 0; i < inputValue.length; i++) {
+                if (validChars.indexOf(inputValue[i]) === -1) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function validarEntrada2(inputValue2, inputBase2) {
+
+            var validChars = '';
+
+            if (inputBase2 === 'decimal') {
+                validChars = '0123456789';
+            } else if (inputBase2 === 'hexadecimal') {
+                validChars = '0123456789ABCDEFabcdef';
+            } else if (inputBase2 === 'octal') {
+                validChars = '01234567';
+            } else if (inputBase2 === 'binario') {
+                validChars = '01';
+            }
+
+            for (var i = 0; i < inputValue2.length; i++) {
+                if (validChars.indexOf(inputValue2[i]) === -1) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        const audio = new Audio('hino-santos-fc.mp3');
+        document.getElementById('playButton').addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                audio.muted = false;
+            } else {
+                audio.pause();
+            }
+        });
+
+    </script>
+</body>
+
+</html>

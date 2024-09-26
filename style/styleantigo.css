@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../assets/vila-1.jpg') no-repeat center center fixed;
+    background-size: cover;
+    flex-direction: column;
+}
+
+.container {
+    background-color: #fff;
+    padding: 40px;
+    text-align: center;
+    width: 650px;
+    border-radius: 50px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    border: solid 3px #000000;
+}
+
+h1 {
+    color: #000000;
+    font-style: bold;
+    font-size: 60px;
+}
+
+h3 {
+    color: #555;
+    font-size: 25px;
+}
+
+input[type="text"] {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 20px;
+    border: solid 2px black;
+    width: 450px;
+}
+
+.header {
+    height: 100px;
+    width: 100%;
+    border: red 5px solid;
+}
+
+input[type="checkbox"] {
+    border-radius: 20px;
+    border: solid 2px black;
+}
+
+select {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    border: solid 2px black;
+}
+
+button {
+    background-color: #000000;
+    color: white;
+    padding: 10px 20px;
+    font-size: 20px;
+    border: solid 4px black;
+    border-radius: 50px;
+}
+
+.hino {
+    align-self: self-end;
+}
+
+button:hover {
+    background-color: #fff;
+    color: #000000 ;
+}
+
+#playButton {
+    font-size: 30px;
+    align-self: self-start;
+}
+
+#output {
+    color: white;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #000000;
+    border: 1px solid #63666A;
+    text-align: left;
+    display: none;
+}
